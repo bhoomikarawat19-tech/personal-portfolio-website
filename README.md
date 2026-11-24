@@ -1,2 +1,12 @@
-# personal-portfolio-website
-A Responsive portfolio website developed during  the "prompts to possibilities" workshop showcasing my skills,projects,education,achievementsand contact information 
+# Personal Portfolio Website
+
+A personal portfolio website developed during the "Prompt Engineering:
+From Prompt to Portfolio" workshop.
+
+## Live Demo
+[Visit My Portfolio](https://bhoomikarwt.netlify.app/)
+
+## Technologies Used
+- HTML
+- CSS
+- JavaScript
