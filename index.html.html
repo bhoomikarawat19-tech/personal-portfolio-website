@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTech Computer Engineering Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyberCyan: '#06b6d4',
+                        neonViolet: '#8b5cf6',
+                        neonPink: '#ec4899',
+                        emeraldGlow: '#10b981',
+                        sunsetAmber: '#f59e0b',
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --bg-color: #070913;
+            --card-bg: rgba(15, 23, 42, 0.75);
+            --card-border: rgba(139, 92, 246, 0.25);
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --accent-primary: #8b5cf6;
+            --accent-secondary: #06b6d4;
+            --accent-gradient: linear-gradient(135deg, #8b5cf6, #06b6d4, #ec4899);
+            --orb-1: rgba(139, 92, 246, 0.35);
+            --orb-2: rgba(6, 182, 212, 0.3);
+            --orb-3: rgba(236, 72, 153, 0.25);
+        }
+
+        /* Color Theme Presets */
+        body.theme-cyber {
+            --bg-color: #060812;
+            --card-bg: rgba(13, 20, 36, 0.8);
+            --card-border: rgba(6, 182, 212, 0.3);
+            --accent-primary: #06b6d4;
+            --accent-secondary: #ec4899;
+            --accent-gradient: linear-gradient(135deg, #06b6d4, #8b5cf6, #ec4899);
+            --orb-1: rgba(6, 182, 212, 0.4);
+            --orb-2: rgba(236, 72, 153, 0.35);
+            --orb-3: rgba(139, 92, 246, 0.3);
+        }
+
+        body.theme-emerald {
+            --bg-color: #02120e;
+            --card-bg: rgba(6, 32, 26, 0.82);
+            --card-border: rgba(16, 185, 129, 0.35);
+            --accent-primary: #10b981;
+            --accent-secondary: #06b6d4;
+            --accent-gradient: linear-gradient(135deg, #10b981, #06b6d4, #84cc16);
+            --orb-1: rgba(16, 185, 129, 0.4);
+            --orb-2: rgba(6, 182, 212, 0.3);
+            --orb-3: rgba(132, 204, 22, 0.3);
+        }
+
+        body.theme-sunset {
+            --bg-color: #12060b;
+            --card-bg: rgba(33, 11, 20, 0.82);
+            --card-border: rgba(245, 158, 11, 0.35);
+            --accent-primary: #f59e0b;
+            --accent-secondary: #f43f5e;
+            --accent-gradient: linear-gradient(135deg, #f59e0b, #f43f5e, #8b5cf6);
+            --orb-1: rgba(245, 158, 11, 0.4);
+            --orb-2: rgba(244, 63, 94, 0.35);
+            --orb-3: rgba(139, 92, 246, 0.3);
+        }
+
+        body.theme-highcontrast {
+            --bg-color: #000000;
+            --card-bg: #090d16;
+            --card-border: #06b6d4;
+            --text-main: #ffffff;
+            --text-muted: #cbd5e1;
+            --accent-primary: #22d3ee;
+            --accent-secondary: #f43f5e;
+            --accent-gradient: linear-gradient(135deg, #00f0ff, #ff007f);
+            --orb-1: rgba(0, 240, 255, 0.25);
+            --orb-2: rgba(255, 0, 127, 0.25);
+            --orb-3: rgba(255, 255, 255, 0.15);
+        }
+
+        body.theme-light {
+            --bg-color: #f8fafc;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-border: rgba(99, 102, 241, 0.25);
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-primary: #4f46e5;
+            --accent-secondary: #0284c7;
+            --accent-gradient: linear-gradient(135deg, #4f46e5, #0284c7, #d946ef);
+            --orb-1: rgba(99, 102, 241, 0.25);
+            --orb-2: rgba(14, 165, 233, 0.2);
+            --orb-3: rgba(217, 70, 239, 0.2);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            transition: background-color 0.4s ease, color 0.4s ease;
+            overflow-x: hidden;
+        }
+
+        .bg-grid-pattern {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+            background-size: 28px 28px;
+        }
+
+        /* Glassmorphism Panel */
+        .glass-panel {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .glass-panel-hover:hover {
+            border-color: var(--accent-primary);
+            box-shadow: 0 12px 40px -10px var(--orb-1);
+            transform: translateY(-2px);
+        }
+
+        .gradient-text {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-btn {
+            background: var(--accent-gradient);
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+        .gradient-btn:hover {
+            opacity: 0.92;
+            box-shadow: 0 0 20px var(--orb-1);
+            transform: translateY(-1px);
+        }
+
+        /* Animated Floating Glowing Orbs */
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(90px);
+            pointer-events: none;
+            z-index: 0;
+            animation: floatOrb 18s ease-in-out infinite alternate;
+        }
+
+        .orb-1 {
+            top: -10%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: var(--orb-1);
+        }
+
+        .orb-2 {
+            top: 40%;
+            right: -15%;
+            width: 45vw;
+            height: 45vw;
+            background: var(--orb-2);
+            animation-delay: -6s;
+        }
+
+        .orb-3 {
+            bottom: -10%;
+            left: 20%;
+            width: 40vw;
+            height: 40vw;
+            background: var(--orb-3);
+            animation-delay: -12s;
+        }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(60px, 40px) scale(1.1); }
+            100% { transform: translate(-40px, 80px) scale(0.95); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.2); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-primary); }
+    </style>
+</head>
+<body class="theme-cyber bg-grid-pattern relative selection:bg-cyan-500 selection:text-white">
+
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+
+    <header class="sticky top-0 z-40 w-full border-b border-white/10 bg-black/40 backdrop-blur-xl transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                
+                <!-- Brand Logo -->
+                <a href="#home" class="flex items-center space-x-2">
+                    <span class="text-xl sm:text-2xl font-extrabold font-mono gradient-text">
+                        &lt;<span id="header-logo-name">[Your Name]</span> /&gt;
+                    </span>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden lg:flex items-center space-x-5 text-xs font-semibold uppercase tracking-wider text-slate-300">
+                    <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
+                    <a href="#education" class="hover:text-cyan-400 transition-colors">Education</a>
+                    <a href="#skills" class="hover:text-cyan-400 transition-colors">Skills</a>
+                    <a href="#learning" class="hover:text-cyan-400 transition-colors">Learning</a>
+                    <a href="#projects" class="hover:text-cyan-400 transition-colors">Projects</a>
+                    <a href="#experience" class="hover:text-cyan-400 transition-colors">Experience</a>
+                    <a href="#research" class="hover:text-cyan-400 transition-colors">Research</a>
+                    <a href="#resume" class="hover:text-cyan-400 transition-colors">Resume</a>
+                    <a href="#contact" class="hover:text-cyan-400 transition-colors">Contact</a>
+                </nav>
+
+                <!-- Top Right Action Controls -->
+                <div class="flex items-center space-x-3">
+                    <button onclick="toggleQuickDrawer()" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-semibold text-white border border-white/20 transition flex items-center space-x-1.5" title="Customize Portfolio">
+                        <i class="fa-solid fa-sliders text-cyan-400"></i>
+                        <span class="hidden sm:inline">Edit Data</span>
+                    </button>
+                    <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-slate-300 hover:text-white bg-white/5">
+                        <i class="fa-solid fa-bars text-lg"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Drawer -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-slate-950/95 border-b border-white/10 px-6 py-4 space-y-3 text-sm font-medium">
+            <a href="#about" class="block text-slate-300 hover:text-cyan-400">01. About Me</a>
+            <a href="#education" class="block text-slate-300 hover:text-cyan-400">02. Education</a>
+            <a href="#skills" class="block text-slate-300 hover:text-cyan-400">03. Technical Skills</a>
+            <a href="#learning" class="block text-slate-300 hover:text-cyan-400">04. Currently Learning</a>
+            <a href="#projects" class="block text-slate-300 hover:text-cyan-400">05. Projects</a>
+            <a href="#experience" class="block text-slate-300 hover:text-cyan-400">06. Experience</a>
+            <a href="#research" class="block text-slate-300 hover:text-cyan-400">07. Research</a>
+            <a href="#resume" class="block text-slate-300 hover:text-cyan-400">08. Resume</a>
+            <a href="#contact" class="block text-slate-300 hover:text-cyan-400">09. Contact</a>
+        </div>
+    </header>
+
+    <!-- Quick Customizer Drawer -->
+    <div id="quick-drawer" class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-slate-950/95 backdrop-blur-2xl border-l border-white/15 p-6 shadow-2xl transition-transform duration-300 transform translate-x-full overflow-y-auto">
+        <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-wand-magic-sparkles text-cyan-400"></i>
+                <h3 class="font-bold text-lg text-white">Portfolio Quick Manager</h3>
+            </div>
+            <button onclick="toggleQuickDrawer()" class="text-slate-400 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <!-- Theme Color Selector Presets -->
+        <div class="space-y-4 mb-6">
+            <label class="block text-xs font-mono uppercase tracking-wider text-slate-400">Select Vibrant Theme</label>
+            <div class="grid grid-cols-2 gap-2">
+                <button onclick="setTheme('theme-cyber')" class="p-2.5 rounded-lg border border-cyan-500/40 bg-cyan-950/30 text-xs font-semibold text-cyan-300 flex items-center space-x-2 hover:border-cyan-400">
+                    <span class="w-3 h-3 rounded-full bg-cyan-400"></span>
+                    <span>Cyber Neon</span>
+                </button>
+                <button onclick="setTheme('theme-emerald')" class="p-2.5 rounded-lg border border-emerald-500/40 bg-emerald-950/30 text-xs font-semibold text-emerald-300 flex items-center space-x-2 hover:border-emerald-400">
+                    <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+                    <span>Emerald Aurora</span>
+                </button>
+                <button onclick="setTheme('theme-sunset')" class="p-2.5 rounded-lg border border-amber-500/40 bg-amber-950/30 text-xs font-semibold text-amber-300 flex items-center space-x-2 hover:border-amber-400">
+                    <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                    <span>Sunset Blaze</span>
+                </button>
+                <button onclick="setTheme('theme-highcontrast')" class="p-2.5 rounded-lg border border-rose-500/40 bg-slate-900 text-xs font-semibold text-rose-300 flex items-center space-x-2 hover:border-rose-400">
+                    <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+                    <span>Deep Void</span>
+                </button>
+                <button onclick="setTheme('theme-light')" class="p-2.5 rounded-lg border border-indigo-300 bg-white text-xs font-semibold text-indigo-900 flex items-center space-x-2 col-span-2">
+                    <span class="w-3 h-3 rounded-full bg-indigo-600"></span>
+                    <span>Light Vibrant Theme</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Save All Profile Fields Form -->
+        <form id="quick-profile-form" onsubmit="saveAllProfileData(event)" class="space-y-4">
+            <div class="flex justify-between items-center">
+                <span class="text-xs font-mono uppercase tracking-wider text-slate-400">Core Profile Details</span>
+                <span class="text-[10px] bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded">LocalStorage Enabled</span>
+            </div>
+
+            <div>
+                <label class="block text-xs text-slate-300 mb-1">Your Full Name</label>
+                <input type="text" id="input-name" placeholder="[Your Name]" required class="w-full bg-slate-900 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-400">
+            </div>
+
+            <div>
+                <label class="block text-xs text-slate-300 mb-1">Professional Tagline / Title</label>
+                <input type="text" id="input-title" placeholder="[Professional Title]" required class="w-full bg-slate-900 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-400">
+            </div>
+
+            <div>
+                <label class="block text-xs text-slate-300 mb-1">College / University Name</label>
+                <input type="text" id="input-school" placeholder="[University / College Name]" class="w-full bg-slate-900 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-400">
+            </div>
+
+            <div>
+                <label class="block text-xs text-slate-300 mb-1">Email Address</label>
+                <input type="email" id="input-email" placeholder="[your.email@example.com]" required class="w-full bg-slate-900 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-400">
+            </div>
+
+            <div class="grid grid-cols-2 gap-2">
+                <div>
+                    <label class="block text-xs text-slate-300 mb-1">GitHub Username</label>
+                    <input type="text" id="input-github" placeholder="[GitHub Username]" class="w-full bg-slate-900 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-400">
+                </div>
+                <div>
+                    <label class="block text-xs text-slate-300 mb-1">LinkedIn Username</label>
+                    <input type="text" id="input-linkedin" placeholder="[LinkedIn Username]" class="w-full bg-slate-900 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-400">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs text-slate-300 mb-1">About Me Summary</label>
+                <textarea id="input-about" rows="3" placeholder="[Brief professional bio...]" class="w-full bg-slate-900 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-400"></textarea>
+            </div>
+
+            <!-- Resume Softcopy File Upload Input in Quick Customizer -->
+            <div class="p-3 bg-slate-900/80 rounded-xl border border-white/10 space-y-2">
+                <label class="block text-xs font-semibold text-cyan-300">Upload Resume Softcopy (PDF/Image)</label>
+                <input type="file" id="drawer-resume-input" accept=".pdf,image/*" onchange="handleResumeUpload(event)" class="block w-full text-xs text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-cyan-500/20 file:text-cyan-300 hover:file:bg-cyan-500/30 cursor-pointer">
+                <span id="drawer-resume-status" class="text-[10px] text-slate-400 block">No custom file uploaded yet.</span>
+            </div>
+
+            <button type="submit" class="w-full py-3 rounded-lg gradient-btn font-semibold text-sm shadow-lg flex items-center justify-center space-x-2">
+                <i class="fa-solid fa-floppy-disk"></i>
+                <span>Save All Profile Details At Once</span>
+            </button>
+        </form>
+
+        <div class="mt-6 pt-6 border-t border-white/10 space-y-3">
+            <button onclick="openSectionManagerModal()" class="w-full py-2.5 rounded-lg bg-white/10 hover:bg-white/15 text-white font-medium text-xs flex items-center justify-center space-x-2 border border-white/10">
+                <i class="fa-solid fa-cubes text-purple-400"></i>
+                <span>Manage Section Content</span>
+            </button>
+
+            <div class="grid grid-cols-2 gap-2">
+                <button onclick="exportDataJSON()" class="py-2 rounded bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-mono border border-white/10 flex items-center justify-center space-x-1">
+                    <i class="fa-solid fa-download text-emerald-400"></i>
+                    <span>Export JSON</span>
+                </button>
+                <button onclick="document.getElementById('import-file-input').click()" class="py-2 rounded bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-mono border border-white/10 flex items-center justify-center space-x-1">
+                    <i class="fa-solid fa-upload text-cyan-400"></i>
+                    <span>Import JSON</span>
+                </button>
+                <input type="file" id="import-file-input" class="hidden" accept=".json" onchange="importDataJSON(event)">
+            </div>
+
+            <button onclick="resetDefaultData()" class="w-full text-center text-xs text-rose-400 hover:underline pt-2">
+                Reset All Fields to Defaults
+            </button>
+        </div>
+    </div>
+
+    <!-- Floating Quick Manager Toggle Button -->
+    <button onclick="toggleQuickDrawer()" class="fixed bottom-6 right-6 z-40 p-4 rounded-full gradient-btn shadow-2xl flex items-center justify-center text-xl group" title="Open Quick Customizer">
+        <i class="fa-solid fa-gear group-hover:rotate-90 transition-transform duration-500"></i>
+    </button>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-28 py-12">
+
+        <!-- Hero Section -->
+        <section id="home" class="min-h-[82vh] flex flex-col justify-center items-start relative pt-6">
+            <div class="inline-flex items-center space-x-2.5 px-4 py-1.5 rounded-full bg-white/5 border border-white/15 text-xs sm:text-sm font-mono mb-6 backdrop-blur-md">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="text-slate-200">BTech Computer Engineering &amp; AI Learner</span>
+            </div>
+
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-4 leading-tight">
+                Hi, I'm <span id="display-name" class="gradient-text">[Your Name]</span>
+            </h1>
+
+            <h2 id="display-title" class="text-xl sm:text-2xl lg:text-3xl text-slate-300 font-semibold mb-6">
+                [Professional Title]
+            </h2>
+
+            <p id="display-about-preview" class="text-slate-400 text-base sm:text-lg max-w-2xl leading-relaxed mb-8">
+                Focused on solid computer engineering foundations (C, Python, Data Structures) while actively exploring Generative AI, Large Language Models, and Agentic Automation.
+            </p>
+
+            <div class="flex flex-wrap gap-4 items-center">
+                <a href="#projects" class="px-6 py-3.5 rounded-xl gradient-btn font-semibold text-sm shadow-xl flex items-center space-x-2">
+                    <span>Explore Projects</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
+                <button onclick="viewResumeModal()" class="px-6 py-3.5 rounded-xl glass-panel hover:bg-white/10 text-white font-semibold text-sm transition flex items-center space-x-2 border border-white/20">
+                    <i class="fa-solid fa-file-pdf text-cyan-400"></i>
+                    <span>View Softcopy Resume</span>
+                </button>
+                <a href="#contact" class="px-6 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-200 text-sm font-semibold border border-white/10 transition">
+                    Contact Me
+                </a>
+            </div>
+
+            <!-- Social Links -->
+            <div class="flex items-center space-x-5 mt-12 text-slate-400 text-2xl">
+                <a id="link-github" href="https://github.com" target="_blank" class="hover:text-cyan-400 transition" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a id="link-linkedin" href="https://linkedin.com" target="_blank" class="hover:text-purple-400 transition" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                <a id="link-email" href="mailto:email@example.com" class="hover:text-rose-400 transition" title="Email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="scroll-mt-24">
+            <div class="flex items-center space-x-3 mb-8">
+                <div class="px-3 py-1 rounded bg-cyan-500/20 text-cyan-400 font-mono text-xs font-bold">01</div>
+                <h2 class="text-2xl sm:text-3xl font-bold">About Me</h2>
+                <div class="h-px bg-white/10 flex-1 ml-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                <div class="lg:col-span-2 glass-panel p-6 sm:p-8 rounded-2xl space-y-4">
+                    <p id="display-about-full" class="text-slate-300 leading-relaxed text-base">
+                        Currently pursuing my BTech degree in Computer Engineering. Dedicated to building reliable software systems, participating in academic research, and discovering practical applications for artificial intelligence models.
+                    </p>
+                    <div class="pt-4 grid grid-cols-2 sm:grid-cols-3 gap-4 border-t border-white/10 text-xs">
+                        <div>
+                            <span class="block text-slate-400 font-mono uppercase text-[10px]">Degree</span>
+                            <span class="font-bold text-white">BTech CSE / CE</span>
+                        </div>
+                        <div>
+                            <span class="block text-slate-400 font-mono uppercase text-[10px]">Primary Tools</span>
+                            <span class="font-bold text-cyan-400">C, Python, Canva</span>
+                        </div>
+                        <div>
+                            <span class="block text-slate-400 font-mono uppercase text-[10px]">Focus Area</span>
+                            <span class="font-bold text-emerald-400">Software &amp; GenAI</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-2xl space-y-4 border border-white/10">
+                    <h3 class="text-base font-bold text-white flex items-center space-x-2">
+                        <i class="fa-solid fa-bullseye text-cyan-400"></i>
+                        <span>Career Direction</span>
+                    </h3>
+                    <ul class="space-y-3 text-xs text-slate-300">
+                        <li class="flex items-start space-x-2">
+                            <i class="fa-solid fa-check text-cyan-400 mt-0.5"></i>
+                            <span>Building algorithmic mastery in C and Python.</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i class="fa-solid fa-check text-cyan-400 mt-0.5"></i>
+                            <span>Exploring generative workflows and LLM agent architectures.</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i class="fa-solid fa-check text-cyan-400 mt-0.5"></i>
+                            <span>Preparing for software development and AI engineering internships.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="scroll-mt-24">
+            <div class="flex items-center space-x-3 mb-8">
+                <div class="px-3 py-1 rounded bg-cyan-500/20 text-cyan-400 font-mono text-xs font-bold">02</div>
+                <h2 class="text-2xl sm:text-3xl font-bold">Education</h2>
+                <div class="h-px bg-white/10 flex-1 ml-4"></div>
+            </div>
+
+            <div class="relative border-l-2 border-cyan-500/30 ml-4 pl-6 space-y-8">
+                <div class="relative">
+                    <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-cyan-400 border-4 border-slate-950"></div>
+                    <div class="glass-panel p-6 rounded-2xl glass-panel-hover transition">
+                        <div class="flex flex-wrap justify-between items-start gap-2 mb-2">
+                            <h3 class="text-lg font-bold text-white">Bachelor of Technology (BTech) - Computer Engineering</h3>
+                            <span class="px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-mono">Present</span>
+                        </div>
+                        <p id="display-education-school" class="text-slate-400 text-xs font-medium mb-3">[University / College Name]</p>
+                        <p class="text-slate-300 text-xs leading-relaxed">
+                            Coursework: Data Structures, Analysis of Algorithms, Object Oriented Programming, DBMS, Computer Networks, Operating Systems, Software Engineering.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="scroll-mt-24">
+            <div class="flex items-center space-x-3 mb-8">
+                <div class="px-3 py-1 rounded bg-cyan-500/20 text-cyan-400 font-mono text-xs font-bold">03</div>
+                <h2 class="text-2xl sm:text-3xl font-bold">Technical Skills</h2>
+                <div class="h-px bg-white/10 flex-1 ml-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <!-- Skill C -->
+                <div class="glass-panel p-6 rounded-2xl glass-panel-hover transition">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <div class="p-3 rounded-lg bg-blue-500/20 text-blue-400"><i class="fa-solid fa-code text-xl"></i></div>
+                        <div>
+                            <h3 class="font-bold text-white text-base">C Language</h3>
+                            <p class="text-xs text-slate-400">Core Systems Programming</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed">Pointers, memory management, dynamic structures, standard I/O operations, and algorithm optimization.</p>
+                </div>
+
+                <!-- Skill Python -->
+                <div class="glass-panel p-6 rounded-2xl glass-panel-hover transition">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <div class="p-3 rounded-lg bg-yellow-500/20 text-yellow-400"><i class="fa-brands fa-python text-xl"></i></div>
+                        <div>
+                            <h3 class="font-bold text-white text-base">Python</h3>
+                            <p class="text-xs text-slate-400">Scripting &amp; Logic</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed">OOP concepts, data manipulation, file handling, automation, and introductory AI/ML prototyping.</p>
+                </div>
+
+                <!-- Skill Canva -->
+                <div class="glass-panel p-6 rounded-2xl glass-panel-hover transition">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <div class="p-3 rounded-lg bg-purple-500/20 text-purple-400"><i class="fa-solid fa-palette text-xl"></i></div>
+                        <div>
+                            <h3 class="font-bold text-white text-base">Canva</h3>
+                            <p class="text-xs text-slate-400">Design &amp; Visuals</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed">UI mockups, presentation slide decks, visual documentation, and technical graphics.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Currently Learning -->
+        <section id="learning" class="scroll-mt-24">
+            <div class="flex items-center space-x-3 mb-8">
+                <div class="px-3 py-1 rounded bg-cyan-500/20 text-cyan-400 font-mono text-xs font-bold">04</div>
+                <h2 class="text-2xl sm:text-3xl font-bold">Currently Learning</h2>
+                <div class="h-px bg-white/10 flex-1 ml-4"></div>
+            </div>
+
+            <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-white/10">
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <div class="p-3.5 rounded-xl bg-slate-900/60 border border-white/10 flex items-center space-x-3">
+                        <i class="fa-solid fa-microchip text-cyan-400"></i>
+                        <span class="text-xs font-medium text-slate-200">DSA</span>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-slate-900/60 border border-white/10 flex items-center space-x-3">
+                        <i class="fa-solid fa-plug text-purple-400"></i>
+                        <span class="text-xs font-medium text-slate-200">REST APIs</span>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-slate-900/60 border border-white/10 flex items-center space-x-3">
+                        <i class="fa-solid fa-brain text-pink-400"></i>
+                        <span class="text-xs font-medium text-slate-200">LLMs</span>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-slate-900/60 border border-white/10 flex items-center space-x-3">
+                        <i class="fa-solid fa-wand-magic-sparkles text-emerald-400"></i>
+                        <span class="text-xs font-medium text-slate-200">Generative AI</span>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-slate-900/60 border border-white/10 flex items-center space-x-3">
+                        <i class="fa-solid fa-robot text-amber-400"></i>
+                        <span class="text-xs font-medium text-slate-200">Agentic AI</span>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-slate-900/60 border border-white/10 flex items-center space-x-3">
+                        <i class="fa-solid fa-chart-line text-blue-400"></i>
+                        <span class="text-xs font-medium text-slate-200">Machine Learning</span>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-slate-900/60 border border-white/10 flex items-center space-x-3">
+                        <i class="fa-solid fa-globe text-teal-400"></i>
+                        <span class="text-xs font-medium text-slate-200">Web Development</span>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-slate-900/60 border border-white/10 flex items-center space-x-3">
+                        <i class="fa-brands fa-git-alt text-orange-400"></i>
+                        <span class="text-xs font-medium text-slate-200">Git / GitHub</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="scroll-mt-24">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+                <div class="flex items-center space-x-3">
+                    <div class="px-3 py-1 rounded bg-cyan-500/20 text-cyan-400 font-mono text-xs font-bold">05</div>
+                    <h2 class="text-2xl sm:text-3xl font-bold">Projects</h2>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-500 text-xs"></i>
+                        <input type="text" id="project-search" onkeyup="renderProjects()" placeholder="Search projects..." class="bg-slate-900/80 border border-white/10 rounded-lg pl-8 pr-4 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400">
+                    </div>
+                    <button onclick="openSectionManagerModal()" class="px-3 py-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 text-xs font-semibold hover:bg-cyan-500/30">
+                        + Project
+                    </button>
+                </div>
+            </div>
+
+            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Projects dynamically populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Experience & Opportunities Section -->
+        <section id="experience" class="scroll-mt-24">
+            <div class="flex items-center space-x-3 mb-8">
+                <div class="px-3 py-1 rounded bg-cyan-500/20 text-cyan-400 font-mono text-xs font-bold">06</div>
+                <h2 class="text-2xl sm:text-3xl font-bold">Experience &amp; Opportunities</h2>
+                <div class="h-px bg-white/10 flex-1 ml-4"></div>
+            </div>
+
+            <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-white/10">
+                <div class="flex items-start space-x-4">
+                    <div class="p-3 rounded-lg bg-purple-500/20 text-purple-400 shrink-0"><i class="fa-solid fa-briefcase text-xl"></i></div>
+                    <div class="w-full">
+                        <div class="flex justify-between items-center mb-1">
+                            <h3 id="display-experience-title" class="text-base font-bold text-white">[Your Role / Experience]</h3>
+                            <button onclick="editExperienceModal()" class="text-xs text-cyan-400 hover:underline"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
+                        </div>
+                        <p class="text-xs text-slate-400 mb-2">Engineering Trainee / Student Open for Internships</p>
+                        <p id="display-experience-desc" class="text-xs text-slate-300 leading-relaxed">
+                            Actively seeking software development, C/Python logic engineering, and AI assistant internships to contribute productively while continuing academic growth.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements & Certifications Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <section id="achievements" class="scroll-mt-24">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center space-x-3">
+                        <div class="px-3 py-1 rounded bg-cyan-500/20 text-cyan-400 font-mono text-xs font-bold">07</div>
+                        <h2 class="text-xl font-bold">Achievements &amp; Recognition</h2>
+                    </div>
+                    <button onclick="openSectionManagerModal('achievements')" class="text-xs text-cyan-400 hover:underline">+ Add</button>
+                </div>
+                <div id="list-achievements" class="space-y-3">
+                    <!-- Dynamic List -->
+                </div>
+            </section>
+
+            <section id="certifications" class="scroll-mt-24">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center space-x-3">
+                        <div class="px-3 py-1 rounded bg-cyan-500/20 text-cyan-400 font-mono text-xs font-bold">08</div>
+                        <h2 class="text-xl font-bold">Certifications</h2>
+                    </div>
+                    <button onclick="openSectionManagerModal('certifications')" class="text-xs text-cyan-400 hover:underline">+ Add</button>
+                </div>
+                <div id="list-certifications" class="space-y-3">
+                    <!-- Dynamic List -->
+                </div>
+            </section>
+        </div>
+
+        <!-- Research & Publications -->
+        <section id="research" class="scroll-mt-24">
+            <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center space-x-3">
+                    <div class="px-3 py-1 rounded bg-cyan-500/20 text-cyan-400 font-mono text-xs font-bold">09</div>
+                    <h2 class="text-2xl sm:text-3xl font-bold">Research &amp; Publications</h2>
+                </div>
+                <button onclick="openSectionManagerModal('research')" class="text-xs text-cyan-400 hover:underline">+ Add Research</button>
+            </div>
+
+            <div id="list-research" class="space-y-4">
+                <!-- Dynamic List -->
+            </div>
+        </section>
+
+        <!-- College Activities & Competitions Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <section id="activities" class="scroll-mt-24">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center space-x-3">
+                        <div class="px-3 py-1 rounded bg-cyan-500/20 text-cyan-400 font-mono text-xs font-bold">10</div>
+                        <h2 class="text-xl font-bold">College Activities</h2>
+                    </div>
+                    <button onclick="openSectionManagerModal('activities')" class="text-xs text-cyan-400 hover:underline">+ Add</button>
+                </div>
+                <div id="list-activities" class="space-y-3">
+                    <!-- Dynamic List -->
+                </div>
+            </section>
+
+            <section id="competitions" class="scroll-mt-24">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center space-x-3">
+                        <div class="px-3 py-1 rounded bg-cyan-500/20 text-cyan-400 font-mono text-xs font-bold">11</div>
+                        <h2 class="text-xl font-bold">Competitions &amp; Hackathons</h2>
+                    </div>
+                    <button onclick="openSectionManagerModal('competitions')" class="text-xs text-cyan-400 hover:underline">+ Add</button>
+                </div>
+                <div id="list-competitions" class="space-y-3">
+                    <!-- Dynamic List -->
+                </div>
+            </section>
+        </div>
+
+        <!-- Resume / CV Upload & View Section -->
+        <section id="resume" class="scroll-mt-24">
+            <div class="flex items-center space-x-3 mb-8">
+                <div class="px-3 py-1 rounded bg-cyan-500/20 text-cyan-400 font-mono text-xs font-bold">12</div>
+                <h2 class="text-2xl sm:text-3xl font-bold">Resume / CV Softcopy</h2>
+                <div class="h-px bg-white/10 flex-1 ml-4"></div>
+            </div>
+
+            <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-white/10 text-center space-y-6">
+                <div class="max-w-md mx-auto space-y-2">
+                    <i class="fa-solid fa-file-pdf text-4xl text-cyan-400"></i>
+                    <h3 class="text-lg font-bold">Curriculum Vitae Softcopy</h3>
+                    <p class="text-xs text-slate-400">Upload your PDF or Image softcopy resume to store and preview directly on this website.</p>
+                </div>
+
+                <!-- Softcopy Upload Area -->
+                <div class="max-w-md mx-auto p-4 rounded-xl bg-slate-900/80 border border-dashed border-white/20 space-y-2">
+                    <label class="block text-xs font-semibold text-slate-300">Upload Resume Softcopy (PDF or Image)</label>
+                    <input type="file" id="main-resume-input" accept=".pdf,image/*" onchange="handleResumeUpload(event)" class="block w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-cyan-500/20 file:text-cyan-300 hover:file:bg-cyan-500/30 cursor-pointer">
+                    <span id="main-resume-filename" class="text-[11px] text-emerald-400 font-mono block">No custom file uploaded yet. Using default template.</span>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button onclick="viewResumeModal()" class="px-5 py-2.5 rounded-lg gradient-btn font-semibold text-xs flex items-center space-x-2">
+                        <i class="fa-solid fa-eye"></i>
+                        <span>Preview Uploaded Softcopy</span>
+                    </button>
+                    <button onclick="downloadResumeSoftcopy()" class="px-5 py-2.5 rounded-lg bg-white/10 hover:bg-white/15 text-white border border-white/20 font-semibold text-xs flex items-center space-x-2">
+                        <i class="fa-solid fa-download"></i>
+                        <span>Download Resume Softcopy</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="scroll-mt-24">
+            <div class="flex items-center space-x-3 mb-8">
+                <div class="px-3 py-1 rounded bg-cyan-500/20 text-cyan-400 font-mono text-xs font-bold">13</div>
+                <h2 class="text-2xl sm:text-3xl font-bold">Get In Touch</h2>
+                <div class="h-px bg-white/10 flex-1 ml-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-white/10">
+                    <h3 class="text-base font-bold text-white mb-4">Send a Direct Message</h3>
+                    <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">Your Name</label>
+                            <input type="text" required placeholder="[Your Name]" class="w-full bg-slate-900 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-400">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">Email</label>
+                            <input type="email" required placeholder="[your.email@example.com]" class="w-full bg-slate-900 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-400">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">Message</label>
+                            <textarea rows="3" required placeholder="Hello, I would like to connect..." class="w-full bg-slate-900 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-400"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-2.5 rounded-lg gradient-btn font-semibold text-xs">
+                            Send Message
+                        </button>
+                    </form>
+                    <div id="contact-toast" class="hidden mt-3 p-2.5 rounded bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs">
+                        Message sent successfully!
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-white/10 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-base font-bold text-white mb-4">Profiles &amp; Social Links</h3>
+                        <div class="space-y-3 text-xs">
+                            <a id="contact-card-email" href="#" class="flex items-center space-x-3 p-3 rounded-xl bg-slate-900/60 hover:bg-slate-900 border border-white/10 transition">
+                                <i class="fa-solid fa-envelope text-cyan-400 text-base"></i>
+                                <div>
+                                    <span class="block text-[10px] text-slate-400">Email Address</span>
+                                    <span id="display-contact-email" class="text-white font-mono">[your.email@example.com]</span>
+                                </div>
+                            </a>
+                            <a id="contact-card-github" href="#" target="_blank" class="flex items-center space-x-3 p-3 rounded-xl bg-slate-900/60 hover:bg-slate-900 border border-white/10 transition">
+                                <i class="fa-brands fa-github text-white text-base"></i>
+                                <div>
+                                    <span class="block text-[10px] text-slate-400">GitHub</span>
+                                    <span id="display-contact-github" class="text-white font-mono">github.com/[username]</span>
+                                </div>
+                            </a>
+                            <a id="contact-card-linkedin" href="#" target="_blank" class="flex items-center space-x-3 p-3 rounded-xl bg-slate-900/60 hover:bg-slate-900 border border-white/10 transition">
+                                <i class="fa-brands fa-linkedin text-purple-400 text-base"></i>
+                                <div>
+                                    <span class="block text-[10px] text-slate-400">LinkedIn</span>
+                                    <span id="display-contact-linkedin" class="text-white font-mono">linkedin.com/in/[username]</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="text-[10px] font-mono text-slate-500 pt-4 border-t border-white/10">
+                        BTech Computer Engineering Portfolio Platform
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Content Manager Modal -->
+    <div id="content-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-slate-950 border border-white/20 max-w-2xl w-full max-h-[85vh] rounded-2xl p-6 overflow-y-auto space-y-4">
+            <div class="flex justify-between items-center border-b border-white/10 pb-3">
+                <h3 class="font-bold text-white text-base">Manage Section Items</h3>
+                <button onclick="closeSectionManagerModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+
+            <!-- Tab Buttons -->
+            <div class="flex flex-wrap gap-2 text-xs border-b border-white/10 pb-2">
+                <button id="tab-btn-projects" onclick="switchContentTab('projects')" class="px-3 py-1 rounded bg-cyan-500/20 text-cyan-300">Projects</button>
+                <button id="tab-btn-certifications" onclick="switchContentTab('certifications')" class="px-3 py-1 rounded bg-white/10 text-slate-300">Certifications</button>
+                <button id="tab-btn-achievements" onclick="switchContentTab('achievements')" class="px-3 py-1 rounded bg-white/10 text-slate-300">Achievements</button>
+                <button id="tab-btn-research" onclick="switchContentTab('research')" class="px-3 py-1 rounded bg-white/10 text-slate-300">Research</button>
+                <button id="tab-btn-activities" onclick="switchContentTab('activities')" class="px-3 py-1 rounded bg-white/10 text-slate-300">Activities</button>
+                <button id="tab-btn-competitions" onclick="switchContentTab('competitions')" class="px-3 py-1 rounded bg-white/10 text-slate-300">Competitions</button>
+            </div>
+
+            <!-- Tab Content Forms -->
+            <div id="content-tab-body" class="space-y-4 text-xs">
+                <!-- Dynamic Content Editor injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Softcopy Resume Viewer Modal -->
+    <div id="resume-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-slate-950 border border-white/20 max-w-3xl w-full max-h-[90vh] rounded-2xl p-6 space-y-4 text-xs flex flex-col">
+            <div class="flex justify-between items-center border-b border-white/10 pb-3">
+                <h3 class="font-bold text-white text-base">Resume Softcopy Viewer</h3>
+                <button onclick="closeResumeModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+
+            <!-- Frame for softcopy PDF/Image or Text Preview -->
+            <div id="resume-viewer-container" class="flex-1 bg-slate-900 border border-white/10 rounded-xl p-4 overflow-y-auto space-y-3 font-mono text-slate-300 min-h-[350px]">
+                <!-- Dynamic softcopy viewer content -->
+            </div>
+
+            <div class="flex justify-between items-center pt-2 border-t border-white/10">
+                <span id="resume-viewer-type" class="text-[10px] text-slate-400">Softcopy Mode</span>
+                <button onclick="downloadResumeSoftcopy()" class="px-4 py-2 gradient-btn rounded text-xs font-semibold">
+                    Download Softcopy
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="border-t border-white/10 py-8 text-center text-xs text-slate-500">
+        <p>&copy; 2026 <span id="footer-name">[Your Name]</span>. Full Editable Portfolio Platform.</p>
+    </footer>
+
+    <script>
+        // Default Portfolio Data Structure with Cleaned Placeholders
+        const defaultData = {
+            theme: 'theme-cyber',
+            profile: {
+                name: '[Your Name]',
+                title: '[Professional Title]',
+                email: 'your.email@example.com',
+                github: 'github-username',
+                linkedin: 'linkedin-username',
+                about: 'Aspiring computer engineering student passionate about software development, C, Python, and emerging Generative AI tools.',
+                school: '[University / College Name]',
+                experienceTitle: '[Your Role / Experience]',
+                experienceDesc: 'Actively seeking software development, C/Python logic engineering, and AI assistant internships.',
+                resumeSoftcopy: null, // Base64 data string of uploaded softcopy
+                resumeFileName: null,
+                resumeFileType: null
+            },
+            projects: [
+                { id: 1, title: 'Student Result Analyzer', tech: 'Python / C', desc: 'Parses academic marks, computes grade distributions, calculates GPA, and outputs aggregated statistical reports.' },
+                { id: 2, title: 'Password Generator', tech: 'Python Utility', desc: 'Generates secure cryptographic passwords with customizable complexity scoring constraints.' },
+                { id: 3, title: 'Library Management System', tech: 'C / Console', desc: 'Console tool managing book issuing, search indices, member tracking, and overdue fine calculations.' }
+            ],
+            certifications: [
+                { id: 1, title: '[Certification Name]', org: '[Issuing Organization]' }
+            ],
+            achievements: [
+                { id: 1, title: '[Achievement Title]', desc: '[Academic or technical recognition summary]' }
+            ],
+            research: [
+                { id: 1, title: '[Research Title / Publication]', desc: '[Abstract summary of review paper or research field]' }
+            ],
+            activities: [
+                { id: 1, title: '[College Activity]', desc: '[Role or technical event involvement]' }
+            ],
+            competitions: [
+                { id: 1, title: '[Competition Entry]', desc: '[Hackathon or coding contest details]' }
+            ]
+        };
+
+        let appData = {};
+
+        // Initialize Data
+        function initData() {
+            const saved = localStorage.getItem('portfolio_app_data_v3');
+            if (saved) {
+                try {
+                    appData = JSON.parse(saved);
+                } catch(e) {
+                    appData = defaultData;
+                }
+            } else {
+                appData = defaultData;
+            }
+            applyDataToDOM();
+        }
+
+        // Apply state to DOM
+        function applyDataToDOM() {
+            setTheme(appData.theme || 'theme-cyber', false);
+
+            const p = appData.profile || {};
+            document.getElementById('display-name').textContent = p.name || '[Your Name]';
+            document.getElementById('header-logo-name').textContent = p.name || '[Your Name]';
+            document.getElementById('footer-name').textContent = p.name || '[Your Name]';
+            document.getElementById('display-title').textContent = p.title || '[Professional Title]';
+            document.getElementById('display-about-preview').textContent = p.about || '';
+            document.getElementById('display-about-full').textContent = p.about || '';
+            document.getElementById('display-education-school').textContent = p.school || '[University / College Name]';
+            document.getElementById('display-experience-title').textContent = p.experienceTitle || '[Your Role / Experience]';
+            document.getElementById('display-experience-desc').textContent = p.experienceDesc || '';
+
+            // Input Fields Fill
+            document.getElementById('input-name').value = p.name || '';
+            document.getElementById('input-title').value = p.title || '';
+            document.getElementById('input-school').value = p.school || '';
+            document.getElementById('input-email').value = p.email || '';
+            document.getElementById('input-github').value = p.github || '';
+            document.getElementById('input-linkedin').value = p.linkedin || '';
+            document.getElementById('input-about').value = p.about || '';
+
+            // Softcopy Status Labels
+            const statusMsg = p.resumeFileName ? `Softcopy Loaded: ${p.resumeFileName}` : 'No custom file uploaded yet. Using default template.';
+            document.getElementById('main-resume-filename').textContent = statusMsg;
+            document.getElementById('drawer-resume-status').textContent = statusMsg;
+
+            // Social links
+            document.getElementById('link-email').href = `mailto:${p.email || ''}`;
+            document.getElementById('link-github').href = `https://github.com/${p.github || ''}`;
+            document.getElementById('link-linkedin').href = `https://linkedin.com/in/${p.linkedin || ''}`;
+
+            document.getElementById('display-contact-email').textContent = p.email || '[your.email@example.com]';
+            document.getElementById('display-contact-github').textContent = `github.com/${p.github || '[username]'}`;
+            document.getElementById('display-contact-linkedin').textContent = `linkedin.com/in/${p.linkedin || '[username]'}`;
+
+            renderProjects();
+            renderLists();
+        }
+
+        // Theme Setter
+        function setTheme(themeClass, save = true) {
+            document.body.className = `${themeClass} bg-grid-pattern relative selection:bg-cyan-500 selection:text-white`;
+            appData.theme = themeClass;
+            if (save) saveToLocalStorage();
+        }
+
+        // Save Form Inputs
+        function saveAllProfileData(e) {
+            e.preventDefault();
+            appData.profile.name = document.getElementById('input-name').value;
+            appData.profile.title = document.getElementById('input-title').value;
+            appData.profile.school = document.getElementById('input-school').value;
+            appData.profile.email = document.getElementById('input-email').value;
+            appData.profile.github = document.getElementById('input-github').value;
+            appData.profile.linkedin = document.getElementById('input-linkedin').value;
+            appData.profile.about = document.getElementById('input-about').value;
+
+            saveToLocalStorage();
+            applyDataToDOM();
+            toggleQuickDrawer();
+            alert('Profile details saved successfully!');
+        }
+
+        // Local Storage Helper
+        function saveToLocalStorage() {
+            localStorage.setItem('portfolio_app_data_v3', JSON.stringify(appData));
+        }
+
+        // Render Projects
+        function renderProjects() {
+            const container = document.getElementById('projects-grid');
+            const search = (document.getElementById('project-search')?.value || '').toLowerCase();
+            container.innerHTML = '';
+
+            const filtered = (appData.projects || []).filter(p => 
+                p.title.toLowerCase().includes(search) || p.tech.toLowerCase().includes(search)
+            );
+
+            filtered.forEach(proj => {
+                const card = document.createElement('div');
+                card.className = 'glass-panel p-6 rounded-2xl glass-panel-hover transition flex flex-col justify-between';
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="px-2.5 py-1 rounded bg-cyan-500/20 text-cyan-300 font-mono text-[10px]">${proj.tech}</span>
+                        </div>
+                        <h3 class="text-base font-bold text-white mb-2">${proj.title}</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed mb-4">${proj.desc}</p>
+                    </div>
+                    <div class="pt-3 border-t border-white/10 flex justify-between items-center text-[10px] text-slate-400 font-mono">
+                        <span>#Project</span>
+                        <button onclick="deleteItem('projects', ${proj.id})" class="text-rose-400 hover:underline">Remove</button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Render Other Content Lists
+        function renderLists() {
+            const certsContainer = document.getElementById('list-certifications');
+            certsContainer.innerHTML = (appData.certifications || []).map(c => `
+                <div class="glass-panel p-4 rounded-xl flex items-center justify-between text-xs">
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-certificate text-cyan-400"></i>
+                        <div>
+                            <h4 class="font-bold text-white">${c.title}</h4>
+                            <p class="text-[10px] text-slate-400">${c.org}</p>
+                        </div>
+                    </div>
+                    <button onclick="deleteItem('certifications', ${c.id})" class="text-rose-400 text-[10px]"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            `).join('');
+
+            const achContainer = document.getElementById('list-achievements');
+            achContainer.innerHTML = (appData.achievements || []).map(a => `
+                <div class="glass-panel p-4 rounded-xl flex items-center justify-between text-xs">
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-trophy text-amber-400"></i>
+                        <div>
+                            <h4 class="font-bold text-white">${a.title}</h4>
+                            <p class="text-[10px] text-slate-400">${a.desc}</p>
+                        </div>
+                    </div>
+                    <button onclick="deleteItem('achievements', ${a.id})" class="text-rose-400 text-[10px]"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            `).join('');
+
+            const resContainer = document.getElementById('list-research');
+            resContainer.innerHTML = (appData.research || []).map(r => `
+                <div class="glass-panel p-6 rounded-2xl border border-white/10 space-y-2 text-xs relative">
+                    <div class="flex justify-between items-center">
+                        <span class="px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 font-mono text-[10px]">Research</span>
+                        <button onclick="deleteItem('research', ${r.id})" class="text-rose-400 text-xs"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                    <h3 class="text-base font-bold text-white">${r.title}</h3>
+                    <p class="text-slate-300">${r.desc}</p>
+                </div>
+            `).join('');
+
+            const actContainer = document.getElementById('list-activities');
+            actContainer.innerHTML = (appData.activities || []).map(act => `
+                <div class="glass-panel p-4 rounded-xl flex items-center justify-between text-xs">
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-users text-purple-400"></i>
+                        <div>
+                            <h4 class="font-bold text-white">${act.title}</h4>
+                            <p class="text-[10px] text-slate-400">${act.desc}</p>
+                        </div>
+                    </div>
+                    <button onclick="deleteItem('activities', ${act.id})" class="text-rose-400 text-[10px]"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            `).join('');
+
+            const compContainer = document.getElementById('list-competitions');
+            compContainer.innerHTML = (appData.competitions || []).map(comp => `
+                <div class="glass-panel p-4 rounded-xl flex items-center justify-between text-xs">
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-laptop-code text-emerald-400"></i>
+                        <div>
+                            <h4 class="font-bold text-white">${comp.title}</h4>
+                            <p class="text-[10px] text-slate-400">${comp.desc}</p>
+                        </div>
+                    </div>
+                    <button onclick="deleteItem('competitions', ${comp.id})" class="text-rose-400 text-[10px]"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            `).join('');
+        }
+
+        // Generic Delete Handler
+        function deleteItem(section, id) {
+            if (appData[section]) {
+                appData[section] = appData[section].filter(item => item.id !== id);
+                saveToLocalStorage();
+                if (section === 'projects') renderProjects();
+                else renderLists();
+            }
+        }
+
+        // Softcopy Resume File Upload Handler
+        function handleResumeUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                appData.profile.resumeSoftcopy = evt.target.result;
+                appData.profile.resumeFileName = file.name;
+                appData.profile.resumeFileType = file.type;
+
+                saveToLocalStorage();
+                applyDataToDOM();
+                alert(`Resume softcopy "${file.name}" uploaded and saved!`);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // View Softcopy Resume Modal
+        function viewResumeModal() {
+            const viewer = document.getElementById('resume-viewer-container');
+            const typeLabel = document.getElementById('resume-viewer-type');
+            const p = appData.profile;
+
+            if (p.resumeSoftcopy) {
+                typeLabel.textContent = `File: ${p.resumeFileName || 'Uploaded Softcopy'}`;
+                if (p.resumeFileType && p.resumeFileType.includes('pdf')) {
+                    viewer.innerHTML = `<iframe src="${p.resumeSoftcopy}" class="w-full h-full min-h-[400px] rounded-lg border-0"></iframe>`;
+                } else if (p.resumeFileType && p.resumeFileType.includes('image')) {
+                    viewer.innerHTML = `<div class="flex justify-center"><img src="${p.resumeSoftcopy}" class="max-w-full max-h-[500px] object-contain rounded-lg"></div>`;
+                } else {
+                    viewer.innerHTML = `<iframe src="${p.resumeSoftcopy}" class="w-full h-full min-h-[400px] rounded-lg border-0"></iframe>`;
+                }
+            } else {
+                typeLabel.textContent = 'Template Softcopy Mode';
+                viewer.innerHTML = `
+                    <div class="space-y-3 font-mono">
+                        <div class="border-b border-white/10 pb-3">
+                            <h3 class="text-lg font-bold text-cyan-400">${p.name || '[Your Name]'}</h3>
+                            <p class="text-xs text-slate-300">${p.title || '[Professional Title]'}</p>
+                            <p class="text-[11px] text-slate-400">${p.email || '[your.email@example.com]'} | ${p.school || '[University Name]'}</p>
+                        </div>
+                        <div>
+                            <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-1">Education</h4>
+                            <p class="text-xs text-slate-300">BTech Computer Engineering - ${p.school || '[University Name]'}</p>
+                        </div>
+                        <div>
+                            <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-1">Core Tech Skills</h4>
+                            <p class="text-xs text-slate-300">C Language, Python, Canva, Data Structures &amp; Algorithms</p>
+                        </div>
+                        <div>
+                            <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-1">Current Focus</h4>
+                            <p class="text-xs text-slate-300">Generative AI, LLM Automation, Agentic System Architecture</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            document.getElementById('resume-modal').classList.remove('hidden');
+        }
+
+        function closeResumeModal() {
+            document.getElementById('resume-modal').classList.add('hidden');
+        }
+
+        function downloadResumeSoftcopy() {
+            const p = appData.profile;
+            if (p.resumeSoftcopy) {
+                const a = document.createElement('a');
+                a.href = p.resumeSoftcopy;
+                a.download = p.resumeFileName || 'Resume_Softcopy';
+                a.click();
+            } else {
+                const txt = `NAME: ${p.name}\nTITLE: ${p.title}\nDEGREE: BTech Computer Engineering\nUNIVERSITY: ${p.school}\nEMAIL: ${p.email}\nSKILLS: C, Python, Canva\nLEARNING: DSA, Generative AI, LLMs`;
+                const blob = new Blob([txt], { type: 'text/plain' });
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = 'Resume_Profile.txt';
+                a.click();
+            }
+        }
+
+        // Section Manager Modal Controls
+        function openSectionManagerModal(tab = 'projects') {
+            document.getElementById('content-modal').classList.remove('hidden');
+            switchContentTab(tab);
+        }
+
+        function closeSectionManagerModal() {
+            document.getElementById('content-modal').classList.add('hidden');
+        }
+
+        function switchContentTab(tab) {
+            const tabs = ['projects', 'certifications', 'achievements', 'research', 'activities', 'competitions'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`tab-btn-${t}`);
+                if (btn) {
+                    if (t === tab) btn.className = 'px-3 py-1 rounded bg-cyan-500/20 text-cyan-300 font-bold';
+                    else btn.className = 'px-3 py-1 rounded bg-white/10 text-slate-300';
+                }
+            });
+
+            const body = document.getElementById('content-tab-body');
+            if (tab === 'projects') {
+                body.innerHTML = `
+                    <form onsubmit="addNewItem(event, 'projects')" class="space-y-3 p-3 bg-slate-900 rounded-xl border border-white/10">
+                        <h4 class="font-bold text-white">Add New Project</h4>
+                        <input type="text" id="add-p-title" placeholder="[Project Title]" required class="w-full bg-slate-950 p-2 rounded border border-white/10 text-white">
+                        <input type="text" id="add-p-tech" placeholder="[Tech Stack e.g. Python / C]" required class="w-full bg-slate-950 p-2 rounded border border-white/10 text-white">
+                        <textarea id="add-p-desc" placeholder="[Project Description]" required class="w-full bg-slate-950 p-2 rounded border border-white/10 text-white"></textarea>
+                        <button type="submit" class="w-full py-2 gradient-btn rounded font-semibold text-xs">+ Add Project</button>
+                    </form>
+                `;
+            } else if (tab === 'certifications') {
+                body.innerHTML = `
+                    <form onsubmit="addNewItem(event, 'certifications')" class="space-y-3 p-3 bg-slate-900 rounded-xl border border-white/10">
+                        <h4 class="font-bold text-white">Add Certification</h4>
+                        <input type="text" id="add-c-title" placeholder="[Certification Name]" required class="w-full bg-slate-950 p-2 rounded border border-white/10 text-white">
+                        <input type="text" id="add-c-org" placeholder="[Issuing Organization]" required class="w-full bg-slate-950 p-2 rounded border border-white/10 text-white">
+                        <button type="submit" class="w-full py-2 gradient-btn rounded font-semibold text-xs">+ Add Certification</button>
+                    </form>
+                `;
+            } else if (tab === 'achievements') {
+                body.innerHTML = `
+                    <form onsubmit="addNewItem(event, 'achievements')" class="space-y-3 p-3 bg-slate-900 rounded-xl border border-white/10">
+                        <h4 class="font-bold text-white">Add Achievement</h4>
+                        <input type="text" id="add-a-title" placeholder="[Achievement Title]" required class="w-full bg-slate-950 p-2 rounded border border-white/10 text-white">
+                        <input type="text" id="add-a-desc" placeholder="[Achievement Description]" required class="w-full bg-slate-950 p-2 rounded border border-white/10 text-white">
+                        <button type="submit" class="w-full py-2 gradient-btn rounded font-semibold text-xs">+ Add Achievement</button>
+                    </form>
+                `;
+            } else if (tab === 'research') {
+                body.innerHTML = `
+                    <form onsubmit="addNewItem(event, 'research')" class="space-y-3 p-3 bg-slate-900 rounded-xl border border-white/10">
+                        <h4 class="font-bold text-white">Add Research / Paper</h4>
+                        <input type="text" id="add-r-title" placeholder="[Research Title / Paper]" required class="w-full bg-slate-950 p-2 rounded border border-white/10 text-white">
+                        <textarea id="add-r-desc" placeholder="[Research Summary]" required class="w-full bg-slate-950 p-2 rounded border border-white/10 text-white"></textarea>
+                        <button type="submit" class="w-full py-2 gradient-btn rounded font-semibold text-xs">+ Add Research</button>
+                    </form>
+                `;
+            } else if (tab === 'activities') {
+                body.innerHTML = `
+                    <form onsubmit="addNewItem(event, 'activities')" class="space-y-3 p-3 bg-slate-900 rounded-xl border border-white/10">
+                        <h4 class="font-bold text-white">Add College Activity</h4>
+                        <input type="text" id="add-act-title" placeholder="[College Activity Name]" required class="w-full bg-slate-950 p-2 rounded border border-white/10 text-white">
+                        <input type="text" id="add-act-desc" placeholder="[Role or Description]" required class="w-full bg-slate-950 p-2 rounded border border-white/10 text-white">
+                        <button type="submit" class="w-full py-2 gradient-btn rounded font-semibold text-xs">+ Add Activity</button>
+                    </form>
+                `;
+            } else if (tab === 'competitions') {
+                body.innerHTML = `
+                    <form onsubmit="addNewItem(event, 'competitions')" class="space-y-3 p-3 bg-slate-900 rounded-xl border border-white/10">
+                        <h4 class="font-bold text-white">Add Competition Entry</h4>
+                        <input type="text" id="add-comp-title" placeholder="[Competition / Hackathon Title]" required class="w-full bg-slate-950 p-2 rounded border border-white/10 text-white">
+                        <input type="text" id="add-comp-desc" placeholder="[Result or Participation Details]" required class="w-full bg-slate-950 p-2 rounded border border-white/10 text-white">
+                        <button type="submit" class="w-full py-2 gradient-btn rounded font-semibold text-xs">+ Add Competition</button>
+                    </form>
+                `;
+            }
+        }
+
+        // Add New Item Handler
+        function addNewItem(e, section) {
+            e.preventDefault();
+            const newItem = { id: Date.now() };
+
+            if (section === 'projects') {
+                newItem.title = document.getElementById('add-p-title').value;
+                newItem.tech = document.getElementById('add-p-tech').value;
+                newItem.desc = document.getElementById('add-p-desc').value;
+            } else if (section === 'certifications') {
+                newItem.title = document.getElementById('add-c-title').value;
+                newItem.org = document.getElementById('add-c-org').value;
+            } else if (section === 'achievements') {
+                newItem.title = document.getElementById('add-a-title').value;
+                newItem.desc = document.getElementById('add-a-desc').value;
+            } else if (section === 'research') {
+                newItem.title = document.getElementById('add-r-title').value;
+                newItem.desc = document.getElementById('add-r-desc').value;
+            } else if (section === 'activities') {
+                newItem.title = document.getElementById('add-act-title').value;
+                newItem.desc = document.getElementById('add-act-desc').value;
+            } else if (section === 'competitions') {
+                newItem.title = document.getElementById('add-comp-title').value;
+                newItem.desc = document.getElementById('add-comp-desc').value;
+            }
+
+            if (!appData[section]) appData[section] = [];
+            appData[section].push(newItem);
+            saveToLocalStorage();
+
+            if (section === 'projects') renderProjects();
+            else renderLists();
+
+            closeSectionManagerModal();
+        }
+
+        // Edit Experience Modal
+        function editExperienceModal() {
+            const newTitle = prompt("Enter Experience Title / Role:", appData.profile.experienceTitle || "[Your Role / Experience]");
+            if (newTitle !== null) {
+                const newDesc = prompt("Enter Experience Description:", appData.profile.experienceDesc || "");
+                if (newDesc !== null) {
+                    appData.profile.experienceTitle = newTitle;
+                    appData.profile.experienceDesc = newDesc;
+                    saveToLocalStorage();
+                    applyDataToDOM();
+                }
+            }
+        }
+
+        // Export/Import JSON
+        function exportDataJSON() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appData, null, 2));
+            const dlAnchor = document.createElement('a');
+            dlAnchor.setAttribute("href", dataStr);
+            dlAnchor.setAttribute("download", "portfolio_editable_data.json");
+            document.body.appendChild(dlAnchor);
+            dlAnchor.click();
+            dlAnchor.remove();
+        }
+
+        function importDataJSON(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                try {
+                    appData = JSON.parse(evt.target.result);
+                    saveToLocalStorage();
+                    applyDataToDOM();
+                    alert('Portfolio profile imported successfully!');
+                } catch(err) {
+                    alert('Invalid JSON file format.');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // Reset
+        function resetDefaultData() {
+            if (confirm('Reset all fields to clean default placeholders?')) {
+                appData = defaultData;
+                saveToLocalStorage();
+                applyDataToDOM();
+            }
+        }
+
+        // UI Drawer Toggle
+        function toggleQuickDrawer() {
+            document.getElementById('quick-drawer').classList.toggle('translate-x-full');
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            const toast = document.getElementById('contact-toast');
+            toast.classList.remove('hidden');
+            e.target.reset();
+            setTimeout(() => toast.classList.add('hidden'), 3000);
+        }
+
+        // Mobile Nav Toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Initialize on Load
+        window.onload = function() {
+            initData();
+        };
+    </script>
+</body>
+</html>
